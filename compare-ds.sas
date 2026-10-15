@@ -16,8 +16,6 @@
 /*                             will be run without ID statement (default is null)                   */
 /*               criterion= put the value to fullfill CRITERION option, METHOD will then be set on  */
 /*                             ABSOLUTE (default is null)                                           */
-/*               var_eq_list= put Y to get the list of the variables with equal values in the result*/
-/*                                of the PROC COMPARE, i.e. LISTEQUALVAR option (default is null)   */
 /*               more_ds= put Y to get the datasets containing the records present in one dataset   */
 /*                             but not the other one, based on ID keys (default is null)            */
 /*               dup_ds= put Y to get a subselection of each input dataset (ending with _DUP)       */
@@ -61,12 +59,12 @@
 /* Software and version: SAS Version 9.4                                                            */
 /****************************************************************************************************/
 
-%MACRO compare_ds (ds_left=, ds_right=, id_keys=, criterion=, var_eq_list=,
+%MACRO compare_ds (ds_left=, ds_right=, id_keys=, criterion=,
                     more_ds=, dup_ds=Y, focus=_ALL_, maxprint=200,
-               compbl=, upcase=, compress=, cpr_list=%STR( ), strip=,
-               options_left=, options_right=, 
-               manual_comp_opt=,
-               debug=) /SECURE;
+                    compbl=, upcase=, compress=, cpr_list=%STR( ), strip=,
+                    options_left=, options_right=, 
+                    manual_comp_opt=,
+                    debug=) /SECURE;
 
    %IF %SYSFUNC(FINDC(%STR(&ds_left.), %STR(.)))>0 %THEN %DO;
       %LET ds_left2=%SUBSTR(%SCAN(%STR(&ds_left.), 2, %STR(.)), 1, %SYSFUNC(MIN(%LENGTH(%SCAN(%STR(&ds_left.), 2, %STR(.))), 17)))_cpl;
